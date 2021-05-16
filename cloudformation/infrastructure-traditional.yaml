@@ -57,17 +57,10 @@ Resources:
         Ref: pVpcId
       SecurityGroupIngress:
         - IpProtocol: tcp
-          FromPort: 3000
-          ToPort: 3000
-          CidrIp: 
-            Ref: pIpAwsAll
-      SecurityGroupIngress:
-        - IpProtocol: tcp
           FromPort: 443
           ToPort: 443
           CidrIp: 
             Ref: pIpAwsAll
-      SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 80
           ToPort: 80
@@ -90,13 +83,11 @@ Resources:
           ToPort: 3000
           CidrIp: 
             Ref: pIpAwsAll
-      SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 443
           ToPort: 443
           CidrIp: 
             Ref: pIpAwsAll
-      SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 80
           ToPort: 80
@@ -264,8 +255,8 @@ Resources:
           - AZRebalance
           - AlarmNotification
 
-
-  rTargetTrackingScalingPolicyLogs:
+##Elastic ASG Configs
+  rTargetTrackingScalingPolicy:
     Type: AWS::AutoScaling::ScalingPolicy
     Properties:
       AutoScalingGroupName:
@@ -277,7 +268,7 @@ Resources:
           PredefinedMetricType: ASGAverageCPUUtilization
         TargetValue: 75
 
-  rCPUScaleUpPolicyLogs:
+  rCPUScaleUpPolicy:
     Type: AWS::AutoScaling::ScalingPolicy
     Properties:
       AdjustmentType: ChangeInCapacity
@@ -287,7 +278,7 @@ Resources:
         Ref: pScaleUpWaitTime
       ScalingAdjustment: 1
 
-  rCPUAlarmHighLogs:
+  rCPUAlarmHigh:
     Type: AWS::CloudWatch::Alarm
     Properties:
       EvaluationPeriods: 1
@@ -297,7 +288,7 @@ Resources:
       AlarmDescription: Alarm if CPU too high or metric disappears indicating instance is down
       Period: 60
       AlarmActions:
-        - Ref: rCPUScaleUpPolicyLogs
+        - Ref: rCPUScaleUpPolicy
       Namespace: AWS/EC2
       Dimensions:
         - Name: AutoScalingGroupName
@@ -306,7 +297,7 @@ Resources:
       ComparisonOperator: GreaterThanThreshold
       MetricName: CPUUtilization
 
-  rMemScaleUpPolicyLogs:
+  rMemScaleUpPolicy:
     Type: AWS::AutoScaling::ScalingPolicy
     Properties:
       AdjustmentType: ChangeInCapacity
@@ -316,7 +307,7 @@ Resources:
         Ref: pScaleUpWaitTime
       ScalingAdjustment: 1
 
-  rMemAlarmHighLogs:
+  rMemAlarmHigh:
     Type: AWS::CloudWatch::Alarm
     Properties:
       EvaluationPeriods: 1
@@ -326,7 +317,7 @@ Resources:
       AlarmDescription: Alarm if Memory too high or metric disappears indicating instance is down
       Period: 60
       AlarmActions:
-        - Ref: rMemScaleUpPolicyLogs
+        - Ref: rMemScaleUpPolicy
       Namespace: CWAgent
       Dimensions:
         - Name: AutoScalingGroupName
