@@ -14,10 +14,10 @@ hooks:
       timeout: 300
       runas: root
 
-#  AfterInstall:
-#    - location: scripts/install_timeoff-management.sh
-#      timeout: 300
-#      runas: root
+  AfterInstall:
+    - location: scripts/install_timeoff-management.sh
+      timeout: 300
+      runas: root
 
   ApplicationStart:
     - location: scripts/start_timeoff-management.sh
