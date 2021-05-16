@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: Deploys traditional infrastructure to serve timeoff-management applcation
+Description: Deploys traditional infrastructure to serve timeoff-management application
 
 Parameters:
   ### AWS
@@ -157,6 +157,16 @@ Resources:
                   - ec2messages:GetEndpoint
                   - ec2messages:GetMessages
                   - ec2messages:SendReply
+                Effect: Allow
+                Resource: '*'
+        - PolicyName: 's3-access'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Action: 
+                - "s3:PutObject"
+                - "s3:GetObject"
+                - "s3:ListBucket"
                 Effect: Allow
                 Resource: '*'
 
