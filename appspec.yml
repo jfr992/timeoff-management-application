@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /var/
+    destination: /var/timeoff-management/
 hooks:
   ApplicationStop:
     - location: scripts/stop_timeoff-management.sh
