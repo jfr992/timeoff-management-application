@@ -221,10 +221,10 @@ Resources:
               unzip chromedriver_linux64.zip
               mv chromedriver /usr/bin/chromedriver
               #Install initial version of app
-              git clone https://github.com/timeoff-management/application.git /var/timeoff-management
-              cd /var/timeoff-management
-              npm install
-              nohup /usr/bin/npm --prefix /var/timeoff-management/ run start </dev/null &>/dev/null &
+              #git clone https://github.com/timeoff-management/application.git /var/timeoff-management
+              #cd /var/timeoff-management
+              #npm install
+              #nohup /usr/bin/npm --prefix /var/timeoff-management/ run start </dev/null &>/dev/null &
             
   rAutoScalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
